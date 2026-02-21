@@ -312,15 +312,19 @@ public class gaygayhomogay : MonoBehaviour {
    }
 
    IEnumerator StrikeAnimation () {
+   Debug.Log("gay strike animation started");
    solveText.text = "3:";
    solveText.transform.eulerAngles = new Vector3(90, 246, 0);
    for (int i = 0; i < 4; i++) {
       gayTexts[i].text = "";
+      Debug.Log("gay cleared button" + i);
    }
-   yield return new WaitForSeconds(1f);
+   yield return new WaitForSeconds(3f);
+   Debug.Log("gay text restoring");
    solveText.text = ":3";
    currentState(s1, s2, s3, s4);
    solveText.transform.eulerAngles = new Vector3(90, 34, 0);
+   Debug.Log("gay strike animation finished");
    }
 
 #pragma warning disable 414
