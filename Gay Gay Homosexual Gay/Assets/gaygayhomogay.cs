@@ -15,6 +15,7 @@ public class gaygayhomogay : MonoBehaviour {
 
    public KMSelectable[] buttons;
    public TextMesh[] gayTexts;
+   public TextMesh solveText;
 
    private int state = 0;
    private int s1 = 0;
@@ -302,10 +303,24 @@ public class gaygayhomogay : MonoBehaviour {
    void Solve () {
       GetComponent<KMBombModule>().HandlePass();
       ModuleSolved = true;
+      solveText.text = "^w^";
    }
 
    void Strike () {
+      StartCoroutine(StrikeAnimation());
       GetComponent<KMBombModule>().HandleStrike();
+   }
+
+   IEnumerator StrikeAnimation () {
+   solveText.text = "3:";
+   solveText.transform.eulerAngles = new Vector3(90, 246, 0);
+   for (int i = 0; i < 4; i++) {
+      gayTexts[i].text = "";
+   }
+   yield return new WaitForSeconds(1f);
+   solveText.text = ":3";
+   currentState(s1, s2, s3, s4);
+   solveText.transform.eulerAngles = new Vector3(90, 34, 0);
    }
 
 #pragma warning disable 414
