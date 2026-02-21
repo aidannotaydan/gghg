@@ -16,12 +16,12 @@ public class gaygayhomogay : MonoBehaviour {
    public KMSelectable[] buttons;
    public TextMesh[] gayTexts;
 
-   public static int state = 0;
-   public static int s1 = 0;
-   public static int s2 = 0;
-   public static int s3 = 0;
-   public static int s4 = 0;
-   public static int badIndex = 0;
+   private int state = 0;
+   private int s1 = 0;
+   private int s2 = 0;
+   private int s3 = 0;
+   private int s4 = 0;
+   private int badIndex = 0;
 
    string[] words = { "gay", "homosexual"};
 
@@ -301,6 +301,7 @@ public class gaygayhomogay : MonoBehaviour {
 
    void Solve () {
       GetComponent<KMBombModule>().HandlePass();
+      ModuleSolved = true;
    }
 
    void Strike () {
