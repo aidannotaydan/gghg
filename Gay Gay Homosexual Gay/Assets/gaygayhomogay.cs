@@ -315,10 +315,20 @@ public class gaygayhomogay : MonoBehaviour {
    Debug.Log("gay strike animation started");
    solveText.text = "3:";
    solveText.transform.eulerAngles = new Vector3(90, 246, 0);
-   for (int i = 0; i < 4; i++) {
-      gayTexts[i].text = "";
-      Debug.Log("gay cleared button" + i);
+   
+   try {
+      Debug.Log("About to start loop");
+      for (int i = 0; i < 4; i++) {
+         Debug.Log("Loop iteration " + i + " started");
+         gayTexts[i].text = "";
+         Debug.Log("gay cleared button" + i);
+      }
+      Debug.Log("Loop finished");
    }
+   catch (System.Exception e) {
+      Debug.LogError("ERROR IN LOOP: " + e.Message);
+   }
+
    yield return new WaitForSeconds(3f);
    Debug.Log("gay text restoring");
    solveText.text = ":3";
