@@ -1,0 +1,32 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 615501dbe4f3fe94fbf4b564abb10237, type: 3}
+  m_Name: ModConfig
+  m_EditorClassIdentifier: 
+  id: gaygayhomogay
+  title: gay gay homosexual gay
+  author: gay
+  description: '"thats kinda gay bro"
+
+
+    make it say gay gay homosexual gay, dont being anti woke
+
+
+    credits placehonder
+
+
+    The manual can be found in the manuals folder of the game or at ktane.timwi.de.
+
+
+    for any bug reports or other problems, contact aidannotaydan on discord'
+  version: 
+  outputFolder: build
+  previewImage: {fileID: 2800000, guid: d0d5b4c514cad8944ba19f2e42b71471, type: 3}
