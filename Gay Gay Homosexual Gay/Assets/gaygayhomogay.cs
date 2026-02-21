@@ -99,7 +99,23 @@ public class gaygayhomogay : MonoBehaviour {
    }
 
    void Activate () { //Shit that should happen when the bomb arrives (factory)/Lights turn on
+      int initTest = 1;
+      int serial = Bomb.GetSerialNumberNumbers().Last();
+      badIndex = tableIndex(serial);
 
+      while (initTest == 1) {
+         s1 = rnd.Range(0, 2);
+         s2 = rnd.Range(0, 2);
+         s3 = rnd.Range(0, 2);
+         s4 = rnd.Range(0, 2);
+         if (checkState(s1, s2, s3, s4, badIndex) == 1 || currentState(s1, s2, s3, s4) == 3) {
+            initTest = 1;
+         }
+         else {
+            state = currentState(s1, s2, s3, s4);
+            initTest = 0;
+         }
+      }
    }
 
    void Update () { //Shit that happens at any point after initialization
@@ -267,24 +283,7 @@ public class gaygayhomogay : MonoBehaviour {
 
 
    void Start () { //Shit that you calculate, usually a majority if not all of the module
-      int initTest = 1;
       int serial = Bomb.GetSerialNumberNumbers().Last();
-      badIndex = tableIndex(serial);
-
-      while (initTest == 1) {
-         s1 = rnd.Range(0, 2);
-         s2 = rnd.Range(0, 2);
-         s3 = rnd.Range(0, 2);
-         s4 = rnd.Range(0, 2);
-         if (checkState(s1, s2, s3, s4, badIndex) == 1 || currentState(s1, s2, s3, s4) == 3) {
-            initTest = 1;
-         }
-         else {
-            currentState(s1, s2, s3, s4);
-            state = currentState(s1, s2, s3, s4);
-            initTest = 0;
-         }
-      }
 
       Debug.LogFormat("[gay gay homosexual gay #{0}] current state is: {1}", ModuleId, words[s1] + " " + words[s2] + " " + words[s3] + " " + words[s4]);
 
