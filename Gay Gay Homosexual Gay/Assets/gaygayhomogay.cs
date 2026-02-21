@@ -295,7 +295,7 @@ public class gaygayhomogay : MonoBehaviour {
          table = serial % 4;
       }
 
-      Debug.LogFormat("last digit of the serial number is {0}, illegal states taken from table {1}", serial, table);
+      Debug.LogFormat("[gay gay homosexual gay #{0}] last digit of the serial number is {1}, illegal states taken from table {2}", ModuleId, serial, table);
    }
 
 
