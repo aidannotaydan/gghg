@@ -28,6 +28,7 @@ public class gaygayhomogay : MonoBehaviour {
    private int started = 0;
 
    string[] words = { "gay", "homosexual"};
+   string[] sounds = { "clicker-single-mono", "gghg-wet"};
 
    static int ModuleIdCounter = 1;
    int ModuleId;
@@ -35,10 +36,11 @@ public class gaygayhomogay : MonoBehaviour {
 
    void buttonPress (KMSelectable a) {
       a.AddInteractionPunch();
+      Audio.PlaySoundAtTransform(sounds[0], a.transform);
       if (ModuleSolved || strike == 1 || started == 0) {
          return;
       }
-      Audio.PlayGameSoundAtTransform(KMSoundOverride.SoundEffect.ButtonPress, a.transform);
+      // Audio.PlayGameSoundAtTransform(KMSoundOverride.SoundEffect.ButtonPress, a.transform);
       if (a == buttons[0]) {
          if  (checkState((s1 + 1) % 2, s2, s3, s4, badIndex) == 1) {
             strike = 1;
@@ -81,6 +83,7 @@ public class gaygayhomogay : MonoBehaviour {
       }
       if (currentState(s1, s2, s3, s4) == 3) {
          Solve();
+         Audio.PlaySoundAtTransform(sounds[1], transform);
          Debug.LogFormat("[gay gay homosexual gay #{0}] gay gay homosexual gay", ModuleId);
       }
       else {
