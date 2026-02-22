@@ -26,11 +26,13 @@ MonoBehaviour:
 
     also thx to imfy for sounds
 
+    everything else done by me :3
+
 
     The manual can be found in the manuals folder of the game or at ktane.timwi.de.
 
 
-    for any bug reports or other problems, contact aidannotaydan on discord'
+    for any bug reports/other problems/suggestions, contact aidannotaydan on discord'
   version: 1.4
   outputFolder: build
   previewImage: {fileID: 2800000, guid: d0d5b4c514cad8944ba19f2e42b71471, type: 3}

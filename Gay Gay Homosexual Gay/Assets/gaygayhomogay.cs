@@ -40,7 +40,6 @@ public class gaygayhomogay : MonoBehaviour {
       if (ModuleSolved || strike == 1 || started == 0) {
          return;
       }
-      // Audio.PlayGameSoundAtTransform(KMSoundOverride.SoundEffect.ButtonPress, a.transform);
       if (a == buttons[0]) {
          if  (checkState((s1 + 1) % 2, s2, s3, s4, badIndex) == 1) {
             strike = 1;
@@ -240,6 +239,86 @@ public class gaygayhomogay : MonoBehaviour {
       }
    }
 
+   int currentState2 (int a, int b, int c, int d) {
+      if (a == 0) {
+         if (b == 0) {
+            if (c == 0) {
+               if (d == 0) {
+                  return 1;
+               }
+               else {
+                  return 2;
+               }
+            }
+            else {
+               if (d == 0) {
+                  return 3;
+               }
+               else {
+                  return 4;
+               }
+            }
+         }
+         else {
+            if (c == 0) {
+               if (d == 0) {
+                  return 5;
+               }
+               else {
+                  return 6;
+               }
+            }
+            else {
+               if (d == 0) {
+                  return 7;
+               }
+               else {
+                  return 8;
+               }
+            }
+         }
+      }
+      else {
+         if (b == 0) {
+            if (c == 0) {
+               if (d == 0) {
+                  
+                  return 9;
+               }
+               else {
+                  return 10;
+               }
+            }
+            else {
+               if (d == 0) {
+                  return 11;
+               }
+               else {
+                  return 12;
+               }
+            }
+         }
+         else {
+            if (c == 0) {
+               if (d == 0) {
+                  return 13;
+               }
+               else {
+                  return 14;
+               }
+            }
+            else {
+               if (d == 0) {
+                  return 15;
+               }
+               else {
+                  return 16;
+               }
+            }
+         }
+      }
+   }
+
    int tableIndex (int a) {
       if (a % 4 == 0) {
          return 0;
@@ -293,7 +372,43 @@ public class gaygayhomogay : MonoBehaviour {
       }
    }
 
-
+   int checkState2(int a, int b, int c, int d, int s) {
+      if (tableIndex(s) == 1) {
+         if (currentState2(a, b, c, d) == 6 || currentState2(a, b, c, d) == 9 || currentState2(a, b, c, d) == 1 || currentState2(a, b, c, d) == 15) {
+            return 1;
+         }
+         else {
+            return 0;
+         }
+      }
+      else if (tableIndex(s) == 2) {
+         if (currentState2(a, b, c, d) == 2 || currentState2(a, b, c, d) == 10 || currentState2(a, b, c, d) == 5 || currentState2(a, b, c, d) == 11) {
+            return 1;
+         }
+         else {
+            return 0;
+         }
+      }
+      else if (tableIndex(s) == 3) {
+         if (currentState2(a, b, c, d) == 12 || currentState2(a, b, c, d) == 6 || currentState2(a, b, c, d) == 4 || currentState2(a, b, c, d) == 7) {
+            return 1;
+         }
+         else {
+            return 0;
+         }
+      }
+      else if (tableIndex(s) == 0) {
+         if (currentState2(a, b, c, d) == 13 || currentState2(a, b, c, d) == 16 || currentState2(a, b, c, d) == 8 || currentState2(a, b, c, d) == 4) {
+            return 1;
+         }
+         else {
+            return 0;
+         }
+      }
+      else {
+         return 0;
+      }
+   }
 
    void Start () { //Shit that you calculate, usually a majority if not all of the module
       int serial = Bomb.GetSerialNumberNumbers().Last();
@@ -315,11 +430,6 @@ public class gaygayhomogay : MonoBehaviour {
       ModuleSolved = true;
       solveText.text = "^w^";
    }
-
-   // void Strike () {
-   //    StartCoroutine(StrikeAnimation());
-   //    GetComponent<KMBombModule>().HandleStrike();
-   // }
 
    void Strike () {
       Debug.Log("STRIKE CALLED - about to start coroutine");
@@ -356,14 +466,54 @@ public class gaygayhomogay : MonoBehaviour {
    }
 
 #pragma warning disable 414
-   private readonly string TwitchHelpMessage = @"Use !{0} to do something.";
+   private readonly string TwitchHelpMessage = @"use !{0} 1/2/3/4.";
 #pragma warning restore 414
 
    IEnumerator ProcessTwitchCommand (string Command) {
+      Command = Command.Trim().ToUpper();
       yield return null;
+      string commands = Command;
+      for (int i = 0; i < commands.Length; i++) {
+         if ("1234".Contains(commands[i]) == false) {
+            yield return "sendtochaterror whar did u type";
+            yield break;
+         }
+      }
+      for (int i = 0; i < commands.Length; i++) {
+         buttons[Array.IndexOf("1234".ToCharArray(), commands[i])].OnInteract();
+         yield return new WaitForSeconds(.1f);
+      }
    }
 
    IEnumerator TwitchHandleForcedSolve () {
+      while (ModuleSolved == false) {
+         if (s1 != 0) {
+            if (checkState2((s1 + 1) % 2, s2, s3, s4, badIndex) != 1) {
+               buttons[0].OnInteract();
+               yield return new WaitForSeconds(.1f);
+            }
+         }
+         if (s2 != 0) {
+            if (checkState2(s1, (s2 + 1) % 2, s3, s4, badIndex) != 1) {
+               buttons[1].OnInteract();
+               yield return new WaitForSeconds(.1f);
+            }
+         }
+         if (s3 != 1) {
+            if (checkState2(s1, s2, (s3 + 1) % 2, s4, badIndex) != 1) {
+               buttons[2].OnInteract();
+               yield return new WaitForSeconds(.1f);
+            }
+         }
+         if (s4 != 0) {
+            if (checkState2(s1, s2, s3, (s4 + 1) % 2, badIndex) != 1) {
+               buttons[3].OnInteract();
+               yield return new WaitForSeconds(.1f);
+            }
+         }
+         yield return new WaitForSeconds(.1f);
+      }
       yield return null;
    }
+
 }
