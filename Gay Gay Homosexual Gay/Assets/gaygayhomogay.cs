@@ -86,10 +86,10 @@ public class gaygayhomogay : MonoBehaviour {
       else {
          state = state;
       }
-      if (strike == 1) {
+      if (strike == 1) 
          Strike();
       }
-   }
+   
 
    void Awake () { //Avoid doing calculations in here regarding edgework. Just use this for setting up buttons for simplicity.
       ModuleId = ModuleIdCounter++;
