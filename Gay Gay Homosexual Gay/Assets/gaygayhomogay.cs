@@ -16,6 +16,7 @@ public class gaygayhomogay : MonoBehaviour {
    public KMSelectable[] buttons;
    public TextMesh[] gayTexts;
    public TextMesh solveText;
+   public TextMesh strikeText;
 
    private int state = 0;
    private int s1 = 0;
@@ -23,6 +24,8 @@ public class gaygayhomogay : MonoBehaviour {
    private int s3 = 0;
    private int s4 = 0;
    private int badIndex = 0;
+   private int strike = 0;
+   private int started = 0;
 
    string[] words = { "gay", "homosexual"};
 
@@ -32,56 +35,59 @@ public class gaygayhomogay : MonoBehaviour {
 
    void buttonPress (KMSelectable a) {
       a.AddInteractionPunch();
-      if (ModuleSolved) {
+      if (ModuleSolved || strike == 1 || started == 0) {
          return;
       }
       Audio.PlayGameSoundAtTransform(KMSoundOverride.SoundEffect.ButtonPress, a.transform);
       if (a == buttons[0]) {
          if  (checkState((s1 + 1) % 2, s2, s3, s4, badIndex) == 1) {
-            Strike();
-            Debug.LogFormat("button 1 pressed, illegal state reached. level 1 woke smh");
+            strike = 1;
+            Debug.LogFormat("[gay gay homosexual gay #{0}] button 1 pressed, anti woke state reached. smh", ModuleId);
          }
          else {
             s1 = (s1 + 1) % 2;
-            Debug.LogFormat("button 1 pressed, state is legal");
+            Debug.LogFormat("[gay gay homosexual gay #{0}] button 1 pressed, woke o meter hasnt fallen yet, carry on", ModuleId);
          }
       }
       else if (a == buttons[1]) {
          if (checkState(s1, (s2 + 1) % 2, s3, s4, badIndex) == 1) {
-            Strike();
-            Debug.LogFormat("button 2 pressed, illegal state reached. level 1 woke smh");
+            strike = 1;
+            Debug.LogFormat("[gay gay homosexual gay #{0}] button 2 pressed, anti woke state reached. smh", ModuleId);
          }
          else {
            s2 = (s2 + 1) % 2;
-           Debug.LogFormat("button 2 pressed, state is legal");
+           Debug.LogFormat("[gay gay homosexual gay #{0}] button 2 pressed, woke o meter hasnt fallen yet, carry on", ModuleId);
          }
       }
       else if (a == buttons[2]) {
          if (checkState(s1, s2, (s3 + 1) % 2, s4, badIndex) == 1) {
-            Strike();
-            Debug.LogFormat("button 3 pressed, illegal state reached. level 1 woke smh");
+            strike = 1;
+            Debug.LogFormat("[gay gay homosexual gay #{0}] button 3 pressed, anti woke state reached. smh", ModuleId);
          }
          else {
             s3 = (s3 + 1) % 2;
-            Debug.LogFormat("button 3 pressed, state is legal");
+            Debug.LogFormat("[gay gay homosexual gay #{0}] button 3 pressed, woke o meter hasnt fallen yet, carry on", ModuleId);
          }
       }
       else {
          if (checkState(s1, s2, s3, (s4 + 1) % 2, badIndex) == 1) {
-            Strike();
-            Debug.LogFormat("button 4 pressed, illegal state reached. level 1 woke smh");
+            strike = 1;
+            Debug.LogFormat("[gay gay homosexual gay #{0}] button 4 pressed, anti woke state reached. smh", ModuleId);
          }
          else {
             s4 = (s4 + 1) % 2;
-            Debug.LogFormat("button 4 pressed, state is legal");
+            Debug.LogFormat("[gay gay homosexual gay #{0}] button 4 pressed, woke o meter hasnt fallen yet, carry on", ModuleId);
          }
       }
       if (currentState(s1, s2, s3, s4) == 3) {
          Solve();
-         Debug.LogFormat("gay gay homosexual gay");
+         Debug.LogFormat("[gay gay homosexual gay #{0}] gay gay homosexual gay", ModuleId);
       }
       else {
          state = state;
+      }
+      if (strike == 1) {
+         Strike();
       }
    }
 
@@ -104,6 +110,7 @@ public class gaygayhomogay : MonoBehaviour {
       int serial = Bomb.GetSerialNumberNumbers().Last();
       badIndex = tableIndex(serial);
 
+
       while (initTest == 1) {
          s1 = rnd.Range(0, 2);
          s2 = rnd.Range(0, 2);
@@ -117,6 +124,8 @@ public class gaygayhomogay : MonoBehaviour {
             initTest = 0;
          }
       }
+      started = 1;
+      Debug.LogFormat("[gay gay homosexual gay #{0}] current state is: {1}", ModuleId, words[s1] + " " + words[s2] + " " + words[s3] + " " + words[s4]);
    }
 
    void Update () { //Shit that happens at any point after initialization
@@ -286,8 +295,6 @@ public class gaygayhomogay : MonoBehaviour {
    void Start () { //Shit that you calculate, usually a majority if not all of the module
       int serial = Bomb.GetSerialNumberNumbers().Last();
 
-      Debug.LogFormat("[gay gay homosexual gay #{0}] current state is: {1}", ModuleId, words[s1] + " " + words[s2] + " " + words[s3] + " " + words[s4]);
-
       int table = 0;
       if (serial == 4) {
          table = 4;
@@ -296,7 +303,7 @@ public class gaygayhomogay : MonoBehaviour {
          table = serial % 4;
       }
 
-      Debug.LogFormat("[gay gay homosexual gay #{0}] last digit of the serial number is {1}, illegal states taken from table {2}", ModuleId, serial, table);
+      Debug.LogFormat("[gay gay homosexual gay #{0}] last digit of the serial number is {1}, anti woke states taken from table {2}", ModuleId, serial, table);
    }
 
 
@@ -306,35 +313,43 @@ public class gaygayhomogay : MonoBehaviour {
       solveText.text = "^w^";
    }
 
+   // void Strike () {
+   //    StartCoroutine(StrikeAnimation());
+   //    GetComponent<KMBombModule>().HandleStrike();
+   // }
+
    void Strike () {
-      StartCoroutine(StrikeAnimation());
+      Debug.Log("STRIKE CALLED - about to start coroutine");
+      IEnumerator anim = StrikeAnimation();
+      Debug.Log("STRIKE - coroutine created: " + anim);
+      StartCoroutine(anim);
+      Debug.Log("STRIKE - coroutine started, now calling HandleStrike");
       GetComponent<KMBombModule>().HandleStrike();
+      Debug.Log("STRIKE - HandleStrike complete");
    }
 
    IEnumerator StrikeAnimation () {
-   Debug.Log("gay strike animation started");
-   solveText.text = "3:";
-   solveText.transform.eulerAngles = new Vector3(90, 246, 0);
-   
-   try {
-      Debug.Log("About to start loop");
-      for (int i = 0; i < 4; i++) {
-         Debug.Log("Loop iteration " + i + " started");
-         gayTexts[i].text = "";
-         Debug.Log("gay cleared button" + i);
+      Debug.Log("gay strike animation started");
+      Debug.Log("gayTexts array length: " + gayTexts.Length);
+      for (int i = 0; i < gayTexts.Length; i++) {
+         Debug.Log("gayTexts[" + i + "] current text: '" + gayTexts[i].text + "'");
       }
-      Debug.Log("Loop finished");
-   }
-   catch (System.Exception e) {
-      Debug.LogError("ERROR IN LOOP: " + e.Message);
-   }
 
-   yield return new WaitForSeconds(3f);
-   Debug.Log("gay text restoring");
-   solveText.text = ":3";
-   currentState(s1, s2, s3, s4);
-   solveText.transform.eulerAngles = new Vector3(90, 34, 0);
-   Debug.Log("gay strike animation finished");
+      solveText.text = "";
+      strikeText.text = "3:";
+
+      gayTexts[0].text = "ANTI";
+      gayTexts[1].text = "WOKE";
+      gayTexts[2].text = "STATE";
+      gayTexts[3].text = "DETECTED";
+
+      yield return new WaitForSeconds(1f);
+      Debug.Log("gay text restoring");
+      solveText.text = ":3";
+      strikeText.text = "";
+      currentState(s1, s2, s3, s4);
+      strike = 0;
+      Debug.Log("gay strike animation finished");
    }
 
 #pragma warning disable 414
