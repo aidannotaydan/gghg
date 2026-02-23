@@ -414,7 +414,7 @@ public class gaygayhomogay : MonoBehaviour {
       int serial = Bomb.GetSerialNumberNumbers().Last();
 
       int table = 0;
-      if (serial == 4) {
+      if (serial % 4 == 0) {
          table = 4;
       }
       else {
