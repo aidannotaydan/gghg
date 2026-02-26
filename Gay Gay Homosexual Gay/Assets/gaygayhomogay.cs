@@ -28,7 +28,7 @@ public class gaygayhomogay : MonoBehaviour {
    private int started = 0;
 
    string[] words = { "gay", "homosexual"};
-   string[] sounds = { "clicker-single-mono", "gghg-wet"};
+   string[] sounds = { "clicker-single-mono", "gghg-wet", "gghg-maddy-wet", "gghg-aidan"};
 
    static int ModuleIdCounter = 1;
    int ModuleId;
@@ -82,7 +82,7 @@ public class gaygayhomogay : MonoBehaviour {
       }
       if (currentState(s1, s2, s3, s4) == 3) {
          Solve();
-         Audio.PlaySoundAtTransform(sounds[1], transform);
+         Audio.PlaySoundAtTransform(sounds[rnd.Range(1, 4)], transform);
          Debug.LogFormat("[gay gay homosexual gay #{0}] gay gay homosexual gay", ModuleId);
       }
       else {
@@ -352,7 +352,7 @@ public class gaygayhomogay : MonoBehaviour {
          }
       }
       else if (tableIndex(s) == 3) {
-         if (currentState(a, b, c, d) == 12 || currentState(a, b, c, d) == 6 || currentState(a, b, c, d) == 4 || currentState(a, b, c, d) == 7) {
+         if (currentState(a, b, c, d) == 12 || currentState(a, b, c, d) == 15 || currentState(a, b, c, d) == 4 || currentState(a, b, c, d) == 7) {
             return 1;
          }
          else {
@@ -360,7 +360,7 @@ public class gaygayhomogay : MonoBehaviour {
          }
       }
       else if (tableIndex(s) == 0) {
-         if (currentState(a, b, c, d) == 13 || currentState(a, b, c, d) == 16 || currentState(a, b, c, d) == 8 || currentState(a, b, c, d) == 4) {
+         if (currentState(a, b, c, d) == 13 || currentState(a, b, c, d) == 16 || currentState(a, b, c, d) == 8 || currentState(a, b, c, d) == 14) {
             return 1;
          }
          else {
@@ -390,7 +390,7 @@ public class gaygayhomogay : MonoBehaviour {
          }
       }
       else if (tableIndex(s) == 3) {
-         if (currentState2(a, b, c, d) == 12 || currentState2(a, b, c, d) == 6 || currentState2(a, b, c, d) == 4 || currentState2(a, b, c, d) == 7) {
+         if (currentState2(a, b, c, d) == 12 || currentState2(a, b, c, d) == 15 || currentState2(a, b, c, d) == 4 || currentState2(a, b, c, d) == 7) {
             return 1;
          }
          else {
@@ -398,7 +398,7 @@ public class gaygayhomogay : MonoBehaviour {
          }
       }
       else if (tableIndex(s) == 0) {
-         if (currentState2(a, b, c, d) == 13 || currentState2(a, b, c, d) == 16 || currentState2(a, b, c, d) == 8 || currentState2(a, b, c, d) == 4) {
+         if (currentState2(a, b, c, d) == 13 || currentState2(a, b, c, d) == 16 || currentState2(a, b, c, d) == 8 || currentState2(a, b, c, d) == 14) {
             return 1;
          }
          else {
