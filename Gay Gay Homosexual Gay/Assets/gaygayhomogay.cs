@@ -466,7 +466,7 @@ public class gaygayhomogay : MonoBehaviour {
    }
 
 #pragma warning disable 414
-   private readonly string TwitchHelpMessage = @"use !{0} 1/2/3/4.";
+   private readonly string TwitchHelpMessage = @"use !{0} 1/2/3/4 (buttons ordered top to bottom)";
 #pragma warning restore 414
 
    IEnumerator ProcessTwitchCommand (string Command) {
